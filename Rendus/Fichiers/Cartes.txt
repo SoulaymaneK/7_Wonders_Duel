@@ -1,0 +1,537 @@
+--- ID de Cartes ---
+
+- Trois chiffres :
+
+  - Le premier représente le type de carte.
+    - 1 : Matières premières (cartes marrons)
+    - 2 : Produits manufacturés (cartes grises)
+    - 3 : Bâtiments civils (cartes bleues)
+    - 4 : Bâtiments scientifiques (cartes vertes)
+    - 5 : Bâtiments commerciaux (cartes jaunes)
+    - 6 : Bâtiments militaires (cartes rouges)
+    - 7 : Guildes (cartes violettes)
+    - 8 : Merveilles
+
+  - Le deuxième chiffre représente l'âge de la carte.
+    - 0 : Pour les Guildes et Merveilles
+    - 1 : Age 1
+    - 2 : Age 2
+    - 3 : Age 3
+
+  - Les deux chiffres suivants représentent le numéro de la carte dans son type et son âge (par ordre alphabétique).
+
+
+- Exemple : 2203 pour la 3ème carte d'âge 3 de produits manufacturés.
+
+----------------------
+
+1. Matières premières (cartes marrons)
+    - 1101 : Bassin argileux
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Ressource produite : Argile
+        - Nombre de ressources produites : 1
+
+    - 1102 : Cavité
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 pièce
+        - Ressource produite : Argile
+        - Nombre de ressources produites : 1
+
+    - 1103 : Chantier
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Ressource produite : Bois
+        - Nombre de ressources produites : 1
+
+    - 1104 : Exploitation
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 pièce
+        - Ressource produite : Bois
+        - Nombre de ressources produites : 1
+
+    - 1105 : Gisement
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Ressource produite : Pierre
+        - Nombre de ressources produites : 1
+
+    - 1106 : Mine
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 pièce
+        - Ressource produite : Pierre
+        - Nombre de ressources produites : 1
+
+    - 1201 : Briqueterie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 pièces
+        - Ressource produite : Argile
+        - Nombre de ressources produites : 2
+
+    - 1202 : Carrière
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 pièces
+        - Ressource produite : Pierre
+        - Nombre de ressources produites : 2
+
+    - 1203 : Scierie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 pièces
+        - Ressource produite : Bois
+        - Nombre de ressources produites : 2
+
+----------------------
+
+2. Produits manufacturés (cartes grises)
+    - 2101 : Presse
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 pièce
+        - Ressource produite : Papyrus
+        - Nombre de ressources produites : 1
+
+    - 2102 : Verrerie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 pièce
+        - Ressource produite : Verre
+        - Nombre de ressources produites : 1
+
+
+    - 2201 : Séchoir
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Ressource produite : Papyrus
+        - Nombre de ressources produites : 1
+
+    - 2202 : Soufflerie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Ressource produite : Verre
+        - Nombre de ressources produites : 1
+
+----------------------
+
+3. Bâtiments civils (cartes bleues)
+    - 3101 : Autel
+        - Chaînage : {SCAucun, 0, Lune, 3204}
+        - Prix : Gratuit
+        - Récompense : 3 points de victoire
+
+    - 3102 : Bains
+        - Chaînage : {SCAucun, 0, Goutte, 3201}
+        - Prix : 1 pierre
+        - Récompense : 3 points de victoire
+
+    - 3103 : Théâtre
+        - Chaînage : {SCAucun, 0, Masque, 3203}
+        - Prix : Gratuit
+        - Récompense : 3 points de victoire
+
+
+    - 3201 : Aqueduc
+        - Chaînage : {Goutte, 3102, SCAucun, 0}
+        - Prix : 3 pierres
+        - Récompense : 5 points de victoire
+
+    - 3202 : Rostres
+        - Chaînage : {SCAucun, 0, Batiment, 3306}
+        - Prix : 1 pierre, 1 bois
+        - Récompense : 4 points de victoire
+
+    - 3203 : Statue
+        - Chaînage : {Masque, 3103, Pilier, 3302}
+        - Prix : 2 argiles
+        - Récompense : 4 points de victoire
+
+    - 3204 : Temple
+        - Chaînage : {Lune, 3101, Soleil, 3305}
+        - Prix : 1 bois, 1 papyrus
+        - Récompense : 4 points de victoire
+
+    - 3205 : Tribunal
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 bois, 1 verre
+        - Récompense : 5 points de victoire
+
+
+    - 3301 : Hôtel de ville
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 Pierres, 2 Bois
+        - Récompense : 7 points de victoire
+
+    - 3302 : Jardins
+        - Chaînage : {Pilier, 3203, SCAucun, 0}
+        - Prix : 2 Argiles, 2 Bois
+        - Récompense : 6 points de victoire
+
+    - 3303 : Obélisque
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 pierres, 1 verre
+        - Récompense : 5 points de victoire
+
+    - 3304 : Palace
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 argile, 1 pierre, 1 bois, 2 verres
+        - Récompense : 7 points de victoire
+
+    - 3305 : Panthéon
+        - Chaînage : {Soleil, 3204, SCAucun, 0}
+        - Prix : 1 argile, 1 bois, 2 papyrus
+        - Récompense : 6 points de victoire
+
+    - 3306 : Sénat
+        - Chaînage : {Batiment, 3202, SCAucun, 0}
+        - Prix : 2 argile, 1 pierre, 1 papyrus
+        - Récompense : 5 points de victoire
+
+----------------------
+
+4. Bâtiments scientifiques (cartes vertes)
+    - 4101 : Atelier
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 Papyrus
+        - Récompense : 1 point de victoire
+        - Symbole : Fil à plomb
+
+    - 4102 : Apothicaire
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 Verre
+        - Récompense : 1 point de victoire
+        - Symbole : Roue
+
+    - 4103 : Officine
+        - Chaînage : {SCAucun, 0, Engrenage, 4202}
+        - Prix : 2 pièces
+        - Récompense : 0 point de victoire
+        - Symbole : Mortier
+
+    - 4104 : Scriptorium
+        - Chaînage : {SCAucun, 0, Livre, 4201}
+        - Prix : 2 pièces
+        - Récompense : 0 point de victoire
+        - Symbole : Plume
+
+
+    - 4201 : Bibliothèque
+        - Chaînage : {Livre, 4104, SCAucun, 0}
+        - Prix : 1 Pierre, 1 Bois, 1 Verre
+        - Récompense : 2 points de victoire
+        - Symbole : Plume
+
+    - 4202 : Dispensaire
+        - Chaînage : {Engrenage, 4103, SCAucun, 0}
+        - Prix : 2 Argiles, 1 Pierre
+        - Récompense : 2 points de victoire
+        - Symbole : Mortier
+
+    - 4203 : École
+        - Chaînage : {SCAucun, 0, Harpe, 4304}
+        - Prix : 1 Bois, 2 Papyrus
+        - Récompense : 1 point de victoire
+        - Symbole : Roue
+
+    - 4204 : Laboratoire
+        - Chaînage : {SCAucun, 0, LampeGenie, 4303}
+        - Prix : 1 Bois, 2 Verres
+        - Récompense : 1 point de victoire
+        - Symbole : Fil à plomb
+
+
+    - 4301 : Académie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 Pierre, 1 Bois, 2 Verre
+        - Récompense : 3 points de victoires
+        - Symbole : Horloge
+
+    - 4302 : Étude
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 Bois, 1 Verre, 1 Papyrus
+        - Récompense : 3 points de victoires
+        - Symbole : Horloge
+
+    - 4303 : Observatoire
+        - Chaînage : {LampeGenie, 4204, SCAucun, 0}
+        - Prix : 1 Pierre, 2 Papyrus
+        - Récompense : 2 points de victoire
+        - Symbole : Sphere
+
+    - 4304 : Université
+        - Chaînage : {Harpe, 4203, SCAucun, 0}
+        - Prix : 1 Argile, 1 Verre, 1 Papyrus
+        - Récompense : 2 points de victoire
+        - Symbole : Sphere
+
+----------------------
+
+5. Bâtiments commerciaux (cartes jaunes)
+    - 5101 : Dépôt d'argile
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 pièces
+        - Récompense : 0
+        - Ressources gratuites : Aucune
+        - Promotion : 1 pièce pour Argile
+        - Gain : Aucun
+
+    - 5102 : Dépôt de bois
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 pièces
+        - Récompense : 0
+        - Ressources gratuites : Aucune
+        - Promotion : 1 pièce pour Bois
+        - Gain : Aucun
+
+    - 5103 : Dépôt de pierre
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 pièces
+        - Récompense : 0
+        - Ressources gratuites : Aucune
+        - Promotion : 1 pièce pour Pierre
+        - Gain : Aucun
+
+    - 5104 : Taverne
+        - Chaînage : {SCAucun, 0, Vase, 5304}
+        - Prix : gratuit
+        - Récompense : Aucune
+        - Ressources gratuites : 4 pièces
+        - Promotion : Aucune
+        - Gain : Aucune
+
+
+    - 5201 : Brasserie
+        - Chaînage : {SCAucun, 0, Tonneau, 5301}
+        - Prix : gratuit
+        - Récompense : Aucune
+        - Ressources gratuites : 6 pièces
+        - Promotion : Aucune
+        - Gain : Aucune
+
+    - 5202 : Caravansérail
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 pièces, 1 Verre, 1 Papyrus
+        - Récompense : 0 point de victoire
+        - Ressources gratuites : (1 Bois ou 1 Argile ou 1 Verre) /Tour
+        - Promotion : Aucune
+        - Gain : Aucun
+
+    - 5203 : Douanes
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 4 pièces
+        - Récompense : 0 point de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : 1 pièce pour Verre et Papyrus
+        - Gain : Aucun
+
+    - 5204 : Forum
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 pièces, 1 Argile
+        - Récompense : 0 point de victoire
+        - Ressources gratuites : (1 Verre ou 1 Papyrus) /Tour
+        - Promotion : Aucune
+        - Gain : Aucun
+
+
+    - 5301 : Arène
+        - Chaînage : {Tonneau, 5201, SCAucun, 0}
+        - Prix : 1 Argile, 1 Pierre, 1 Bois
+        - Récompense : 3 points de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : Aucune
+        - Gain : 2 par bâtiment de type Merveilles
+
+    - 5302 : Armurerie
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 Pierres, 1 Verre
+        - Récompense : 3 points de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : Aucune
+        - Gain : 1 par bâtiment de type Militaire
+
+    - 5303 : Chambre de commerce
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 Papyrus
+        - Récompense : 3 points de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : Aucune
+        - Gain : 3 par bâtiment de type Produits manufacturés
+
+    - 5304 : Phare
+        - Chaînage : {Vase, 5104, SCAucun, 0}
+        - Prix : 2 Argiles, 1 Verre
+        - Récompense : 3 points de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : Aucune
+        - Gain : 1 par bâtiment de type Bâtiments commerciaux
+
+    - 5305 : Port
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 1 Bois, 1 Verre, 1 Papyrus
+        - Récompense : 3 points de victoire
+        - Ressources gratuites : Aucune
+        - Promotion : Aucune
+        - Gain : 2 par bâtiment de type Matières premières
+
+----------------------
+
+6. Bâtiments militaires (cartes rouges)
+    - 6101 : Caserne
+        - Chaînage : {SCAucun, 0, Epee, 6201}
+        - Prix : 1 Argile
+        - Récompense : 1 bouclier
+
+    - 6102 : Écuries
+        - Chaînage : {SCAucun, 0, FerACheval, 6203}
+        - Prix : 1 Bois
+        - Récompense : 1 bouclier
+
+    - 6103 : Palissade
+        - Chaînage : {SCAucun, 0, Tour, 6304}
+        - Prix : 2 pièces
+        - Récompense : 1 bouclier
+
+    - 6104 : Tour de garde
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : gratuit
+        - Récompense : 1 bouclier
+
+
+    - 6201 : Baraquements
+        - Chaînage : {Epee, 6101, SCAucun, 0}
+        - Prix : 3 pièces
+        - Récompense : 1 bouclier
+
+    - 6202 : Champ de tir
+        - Chaînage : {SCAucun, 0, Cible, 6302}
+        - Prix : 1 Pierre, 1 Bois, 1 Papyrus
+        - Récompense : 2 boucliers
+
+    - 6203 : Haras
+        - Chaînage : {FerACheval, 6102, SCAucun, 0}
+        - Prix : 1 Argile, 1 Bois
+        - Récompense : 1 bouclier
+
+    - 6204 : Muraille
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 2 Pierres
+        - Récompense : 2 boucliers
+
+    - 6205 : Place d'armes
+        - Chaînage : {SCAucun, 0, Casque, 6303}
+        - Prix : 2 Argiles, 1 Verre
+        - Récompense : 2 boucliers
+
+
+    - 6301 : Arsenal
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 3 Argiles, 2 Bois
+        - Récompense : 3 boucliers
+
+    - 6302 : Atelier de siège
+        - Chaînage : {Cible, 6202, SCAucun, 0}
+        - Prix : 3 Bois, 1 Verre
+        - Récompense : 2 boucliers
+
+    - 6303 : Cirque
+        - Chaînage : {Casque, 6205, SCAucun, 0}
+        - Prix : 2 Argiles, 2 Pierres
+        - Récompense : 2 boucliers
+
+    - 6304 : Fortifications
+        - Chaînage : {Tour, 6103, SCAucun, 0}
+        - Prix : 2 Pierres, 1 Argile, 1 Papyrus
+        - Récompense : 2 boucliers
+
+    - 6305 : Prétoire
+        - Chaînage : {SCAucun, 0, SCAucun, 0}
+        - Prix : 8 pièces
+        - Récompense : 3 boucliers
+
+----------------------
+
+7. Guildes (cartes violettes)
+  - Âge : 3
+  - Effets : EFFETS_...
+
+    - 7001 : Guilde des Armateurs
+        - Prix : 1 Argile, 1 Pierre, 1 Verre, 1 Papyrus
+        - NomEffetGuilde : Armateurs
+
+    - 7002 : Guilde des Bâtisseurs
+        - Prix : 2 Pierres, 1 Argile, 1 Bois, 1 Verre
+        - NomEffetGuilde : Bâtisseurs
+
+    - 7003 : Guilde des Commerçants
+        - Prix : 1 Argile, 1 Bois, 1 Pierre, 1 Papyrus
+        - NomEffetGuilde : Commerçants
+
+    - 7004 : Guilde des Magistrats
+        - Prix : 2 Bois, 1 Argile, 1 Papyrus
+        - NomEffetGuilde : Magistrats
+
+    - 7005 : Guilde des Scientifiques
+        - Prix : 2 Argiles, 2 Bois
+        - NomEffetGuilde : Scientifiques
+
+    - 7006 : Guilde des Tacticiens
+        - Prix : 2 Pierres, 1 Argile, 1 Papyrus
+        - NomEffetGuilde : Tacticiens
+
+    - 7007 : Guilde des Usuriers
+        - Prix : 2 Pierres, 2 Bois
+        - NomEffetGuilde : Usuriers
+
+----------------------
+
+8. Merveilles
+
+  - Âge : 0
+  - Chaînage : {SCAucun, 0, SCAucun, 0}
+  - Effets : EFFETS_...
+
+    - 8001 : (Le) Circus Maximus
+        - Prix : 2 Pierres, 1 Bois, 1 Verre
+        - EffetMerveille : CarteGriseDefausse, UnBouclier, TroisPointsVictoire,
+
+    - 8002 : (Le) Colosse
+        - Prix : 3 argiles, 1 verre
+        - EffetMerveille : DeuxBoucliers
+
+    - 8003 : (La) Grande Bibliothèque
+        - Prix : 3 Bois, 1 Verre, 1 Papyrus
+        - EffetMerveille : TirageTroisJetonsProgres
+
+    - 8004 : (Le) Grand Phare
+        - Prix : 1 Bois, 1 Pierre, 2 Papyrus
+        - EffetMerveille : ProductionMatierePremiereChaqueTour, QuatrePointsVictoire
+
+    - 8005 : (Les) Jardins suspendus
+        - Prix : 2 Bois, 1 Verre, 1 Papyrus
+        - EffetMerveille : SixPieces, RejouerTour
+
+    - 8006 : (Le) Mausolée
+        - Prix : 2 Argiles, 2 Verres, 1 Papyrus
+        - EffetMerveille :  ChoixCarteDefausse, DeuxPointsVictoire
+
+    - 8007 : (Le) Pirée
+        - Prix : 1 Argile, 1 Pierre, 2 Bois
+        - EffetMerveille : ProductionManufactureChaqueTour
+
+    - 8008 : (Les) Pyramides
+        - Prix : 3 Pierres, 1 Papyrus
+        - EffetMerveille : NeufPointsVictoire
+
+    - 8009 : (Le) Sphinx
+        - Prix : 1 Argile, 1 Pierre, 1 Verre
+        - EffetMerveille :  SixPointsVictoire
+
+    - 8010 : (La) Statue de Zeus
+        - Prix : 1 Argile, 1 Bois, 1 Pierre, 2 Papyrus
+        - NomEffetMerveille : CarteMarronDefausse
+
+    - 8011 : (Le) Temple d'Artémis
+        - Prix : 1 Bois, 1 Pierre, 1 Verre, 1 Papyrus
+        - EffetMerveille : DouzePieces
+
+    - 8012 : (La) Via Appia
+        - Prix : 2 Argiles, 2 Pierres, 1 Papyrus
+        - EffetMerveille : AdversairePerdTroisPieces, TroisPieces
+
+----------------------

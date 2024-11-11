@@ -1,0 +1,37 @@
+Conventions de nommage =
+- PascalCase => classes
+- camelCase => méthodes et fonctions
+- snake_case => variable (et constantes en majuscules) 
+
+
+Dans Plateau
+
+jetons militaire qui entrainent : 
+J1.modifierPiece(-2) UNIQUEMENT la première fois où pion_conflit = -3
+J1.modifierPiece(-5) UNIQUEMENT la première fois où pion_conflit = -6
+J2.modifierPiece(-2) UNIQUEMENT la première fois où pion_conflit = 3
+J2.ajouterPieces(-5) UNIQUEMENT la première fois où pion_conflit = 6
+
+
+où est implémentée la sélection aléatoire des cartes, pour chaque âge ?
+
+
+Pourquoi est-ce-que dans enum NomEffetMerveille il y a des effets commentés et d'autres non ? tous les effets qui donnent des pts de victoire, pièces et boucliers peuvent être commentés, non ?
+je pense que ça a à voir avec ce qui est fait dans JetonsProgres.h, mais j'ai l'impression qu'on ne traite pas pareil ces différents éléments à incrémenter alors qu'on pourrait le faire ?
+
+J'ai fait des suggestions en commentaire dans carte.h pour MatierePremiere et Manufacture => dites-moi si ça vous va
+
+
+
+à quoi sert getTotalSymbolesScientifiques() dans Joueur ?
+
+dans Plateau, il y a NumJoueur victoireMilitaire() => ce n'est pas déjà fait dans Jeu.cpp ?    [pareil pour getVainqueurMilitaire() du coup]
+
+est-ce-qu'il serait utile d'avoir un attribut jetons_progres_detenus dans Plateau ?
+pcq sinon, qu'adviennent-ils quand ils sont pris par un joueur ?
+
+je ne comprends pas bien le fonctionnement de afficherPlateau()
+à chaque tour, on l'appelle, et il affiche le plateau des 3 âges, c'est ça ?si oui, ce serait pertinent de n'afficher que l'âge courant ?
+
+
+Pour la suppression de la carte achetée des cartes disponibles, c'est plateau.defausserCarte(emplacement); mais pourquoi défausser ? plutôt l'ajouter au joueur et la mettre dans un dico Plateau.cartesJ1/2 non ?

@@ -1,0 +1,252 @@
+@startuml Architecture
+
+class Jeu {
+    - age: int
+    - a_commence: bool
+    - tour: enum(J1, J2)
+
+    + avancerTour()
+    + avancerAge()
+    + verifierVictoire()
+}
+
+class Joueur {
+    - id: enum(J1, J2)
+    - nom: string
+
+    + calculerPieces(): int
+    + calculerRessources(): dict<string, int>
+    + calculerJetonsGuerre(): int
+    + calculerJetonsProgres(): int
+    + calculerPoints(): int
+    }
+
+
+class Piece {
+    valeur: ValeurPiece
+    }
+
+enum ValeurPiece {
+    6
+    3
+    1
+}
+
+Piece -- ValeurPiece
+
+Joueur "1" --> "0..n" Piece: "possède"
+
+Joueur "2" --> "1" Jeu : "joue"
+
+Joueur "1" -- "1" Joueur : "joue contre"
+
+
+class Cartes {
+    - nom: string
+    - age: int
+    - couleur: string
+    - effet: string
+
+    - points: int
+    - gain: int
+    - actif: bool
+
+    - symbole_chainage: SymboleChainage
+
+    - coutMonnaie: int
+    - coutBois: int
+    - coutPierre: int
+    - coutPapyrus: int
+    - coutArgile: int
+    - coutVerre: int
+
+    - valeur_defausse: int
+
+    + defausser(): void
+    + construire(joueur: Joueur): void
+    + acheter(joueur: Joueur): void
+    }
+
+Cartes "0**n" <-- "0..1" Joueur : "possède"
+
+Cartes "1" --> "0..1" Cartes :"est chaîné"
+
+enum SymboleChainage {
+    Goutte
+    Masque
+    FerACheval
+    ...
+}
+
+Cartes -- SymboleChainage
+
+
+class Merveille {
+    - nb_merveilles: static int = 0
+}
+
+Cartes <|-- Merveille : "est une"
+
+class EffetMerveille {
+    - id_effet: int
+    - nom_effet: string
+    - description: string
+}
+
+Merveille "1" --> "1..3" EffetMerveille : "possède"
+
+
+class Production {
+    - ressource__1: Ressource
+    - nb_ressources_1: int
+
+    - ressource_2: Ressource
+    - nb_ressources_2: int
+
+    - ressource_3: Ressource
+    - nb_ressources_3: int
+}
+
+Cartes <|-- Production: "est une"
+
+enum Ressource {
+    Bois
+    Pierre
+    Papyrus
+    Argile
+    Verre
+}
+
+Production -- Ressource
+
+
+class Civil {
+    - nb_points: int
+}
+
+Cartes <|-- Civil: "est une"
+
+
+class Scientifique {
+    - nb_points: int
+    - symbole_scientifique: SymboleScientifique
+}
+
+Cartes <|-- Scientifique: "est une"
+
+enum SymboleScientifique {
+    Plume
+    Roue
+    Horloge
+    Sphere
+    Mortier
+    A
+}
+
+Scientifique -- SymboleScientifique
+
+
+class Militaire {
+    - nb_jetons: int
+}
+
+Cartes <|-- Militaire: "est une"
+
+
+class Guilde {
+    - effet: EffetGuilde
+}
+
+Cartes <|-- Guilde: "est une"
+
+enum EffetGuilde {
+    Armateurs
+    Batisseurs
+    Commercants
+    Magistrats
+    Tacticiens
+    Scientifiques
+    Usuriers
+}
+
+Guilde -- EffetGuilde
+
+
+class Commercial {
+    - nb_points: int
+}
+
+class BaissePrix {
+    - ressource_1: Ressource
+    - nv_cout_1: int
+
+    - ressource_2: Ressource
+    - nv_cout_2: int
+}
+
+class RessourceGratuite {
+    - ressource_1: Ressource
+    - ressource_2: Ressource
+    - ressource_3: Ressource
+}
+
+class ApportPieces {
+    - batiment: Batiment
+    - nb_pieces_par_batiment: int
+}
+
+enum CouleurCarte {
+    Grise
+    Marron
+    Jaune
+    Rouge
+    Merveille
+}
+
+Cartes <|-- Commercial: "est une"
+
+Commercial <|-- BaissePrix: "est une"
+Commercial <|-- RessourceGratuite: "est une"
+Commercial <|-- ApportPieces: "est une"
+
+BaissePrix -- Ressource
+RessourceGratuite -- Ressource
+ApportPieces -- Batiment
+
+
+class Plateau {
+    - pos_pion_conflit: int
+    - taille_plateau_conflit: int
+    - taille_plateau_progres: int
+
+    + repartirCartes()
+}
+
+Plateau "1" <-- "0..n" Cartes : "est sur"
+
+Plateau "1" <-- "1" Jeu : "est sur"
+
+
+class JetonProgres {
+    - effet: string
+
+    + appliquerEffet(): void
+}
+
+Joueur "1" --> "0..5" JetonProgres :"Possède"
+
+JetonProgres "0..5" --> "1" Plateau : "est sur"
+
+class JetonMilitaire {
+    - nb_points: int
+    - position_plateau_conflit: int
+
+    + ajouterPoints(): void
+}
+
+Joueur "1" --> "0..6" JetonMilitaire :"Possède"
+
+JetonMilitaire "0..6" --> "1" Plateau : "est sur"
+
+
+@enduml

@@ -1,0 +1,346 @@
+@startuml Architecture
+
+class Jeu {
+    - joueur1 : Joueur
+    - joueur2 : Joueur
+    - plateau : Plateau
+    - tour: NumJoueur
+    - age: int
+    - a_commence: bool
+    - winner : int (-1,0,1,2)
+    - nb_merveilles_construites : int
+
+    + avancerTour()
+    + avancerAge()
+    + verifierVictoire()
+    + debuterJeu()
+    + chargerCartes(age)
+    + initialiserDictCartesPlateau(age)
+    + acheterCarte(rJoueur_acheteur, emplacement)
+    + ajouterGains(pCarte, rJoueur)
+    + partie()
+    + choixCarte()
+    + choixAction()
+    + jouerUnTour(tour)
+    + construireMerveille(rJoueur_acheteur, emplacement, pMerveille)
+    + choixMerveilleAconstruire(rJoueur)
+    + choixMerveilleDebut(rJoueur1, rJoueur2)
+    + calculPointsVictoire(joueur)
+    + calculPointsCivils(joueur)
+    + verifierChainage(pJoueur, pCarte)
+}
+
+enum NumJoueur {
+    NJAucun = 0
+    J1 = 1
+    J2 = 2
+}
+
+Jeu -- NumJoueur
+
+class Joueur {
+    - nom : string    
+    - dict_ressources : map<Ressource, int>
+    - points : int
+    - dict_symboles_scientifiques : map<SymboleScientifique, int>
+    - liste_jetons_progres : vector<pJetonProgres>
+    - dict_cartes : map<TypeCarte, vector<pCarte>>
+    - defausse : map<TypeCarte, vector<pCarte>>
+    - merveille_a_construire : vector<pMerveille>
+
+    + ajouterPoints(value)
+    + ajouterMerveille(pMerveille)
+    + retirerMerveille(pMerveille)
+    + ajouterSymboleScientifique(symbole)
+    + ajouterJetonProgres(pJeton)
+    + ajouterRessource(type, value)
+    + retirerRessource(type, value)
+    + ajouterCarte(pCarte)
+    + retirerCarte(pCarte)
+    + ajouterCarteDefausse(pCarte)
+    + retirerCarteDefausse(pCarte)
+    + afficherJoueur()
+    }
+
+Joueur "2" --> "1" Jeu : "joue"
+
+Joueur "1" -- "1" Joueur : "joue contre"
+
+
+class Carte {
+    - id : int
+    - nom : string
+    - age : int
+    - type : TypeCarte
+    - chainage : Chainage    
+    - cout_ressource : map<Ressource, int>
+
+    + afficher()
+    }
+
+enum TypeCarte {
+    TAucun
+    TMatierePremiere
+    TManufacture
+    TCivil
+    TScientifique
+    TCommercial
+    TMilitaire
+    TGuilde
+    TMerveille
+}
+
+Carte -- TypeCarte
+
+Carte "0**n" <-- "0..1" Joueur : "possède"
+
+Chainage "0..1" <-- "0..1" Carte : "possède"
+
+class Chainage {
+    + symbole_age_precedent : SymboleChainage
+    + id_carte_age_precedent : int
+    + symbole_age_suivant : SymboleChainage
+    + id_carte_age_suivant : int
+}
+
+enum SymboleChainage {
+    SCAucun
+    Batiment
+    Casque
+    Cible
+    Engrenage
+    Epee
+    FerACheval
+    Goutte
+    Harpe
+    LampeGenie
+    Livre
+    Lune
+    Masque
+    Pilier
+    Soleil
+    Tonneau
+    Tour
+    Vase
+}
+
+Chainage -- SymboleChainage
+
+
+class Merveille {
+    - nb_boucliers : int
+    - nb_points_victoire : int
+    - nb_pieces : int
+    - effets : vector<EffetMerveille>
+}
+
+Carte <|-- Merveille : "est une"
+
+class EffetMerveille {
+    + effet : NomEffetMerveille
+    + nom : string
+    + description : string
+}
+
+EffetMerveille "1..4" <-- "0..1" Merveille : "possède"
+
+enum NomEffetMerveille {
+    CarteGriseDefausse
+    ProductionMatierePremiereChaqueTour
+    RejouerTour
+    TirageTroisJetonsProgres
+    ChoixCarteDefausse
+    ProductionManufactureChaqueTour
+    CarteMarronDefausse
+    AdversairePerdTroisPieces
+    UnBouclier
+    DeuxBoucliers
+    DeuxPointsVictoire
+    TroisPointsVictoire
+    QuatrePointsVictoire
+    SixPointsVictoire
+    NeufPointsVictoire
+    TroisPieces
+    SixPieces
+    DouzePieces
+}
+
+EffetMerveille -- NomEffetMerveille
+
+class MatierePremiere {
+    - ressource_produite : Ressource
+    - nb_ressources_produites : int
+}
+
+Carte <|-- MatierePremiere: "est une"
+
+class Manufacture {
+    - ressource_produite : Ressource
+    - nb_ressources_produites : int
+}
+
+Carte <|-- Manufacture: "est une"
+
+enum Ressource {
+    Bois
+    Pierre
+    Papyrus
+    Argile
+    Verre
+}
+
+MatierePremiere -- Ressource
+Manufacture -- Ressource
+
+
+class Civil {
+    - nb_points_victoire : int
+}
+
+Carte <|-- Civil: "est une"
+
+
+class Scientifique {
+    - nb_points_victoire : int
+    - symbole_scientifique : SymboleScientifique
+}
+
+Carte <|-- Scientifique: "est une"
+
+enum SymboleScientifique {
+    Plume
+    Roue
+    Horloge
+    Sphere
+    Mortier
+    FilAPlomb
+    Balance
+}
+
+Scientifique -- SymboleScientifique
+
+
+class Militaire {
+    - nb_boucliers : int
+}
+
+Carte <|-- Militaire: "est une"
+
+
+class Guilde {
+    - effet : EffetGuilde
+}
+
+Carte <|-- Guilde: "est une"
+
+class EffetGuilde {
+    + effet : NomEffetGuilde
+    + nom : string
+    + description : string
+}
+
+EffetGuilde "1..2" <-- "0..1" Guilde : "possède"
+
+enum NomEffetGuilde {
+    Armateurs
+    Batisseurs
+    Commercants
+    Magistrats
+    Tacticiens
+    Scientifiques
+    Usuriers
+}
+
+EffetGuilde -- NomEffetGuilde
+
+
+class Commercial {
+    - nb_points_victoire : int
+    - nb_pieces : int
+    - ressources_gratuites : vector<Ressource>
+    - baisses_prix : map<Ressource, int>
+    - batiment_gain_pieces : TypeCarte
+    - gain_pieces_par_batiment : int
+}
+
+
+
+
+Carte <|-- Commercial: "est une"
+
+
+Commercial -- Ressource
+
+
+class Plateau {
+    - pion_conflit : int
+    - jetons_progres_disponibles : vector<pJetonProgres>
+    - dict_cartes : vector<emplacement, pCarte>
+    - emplacements_achetes : vector<int>
+    - emplacements_caches : vector<int>
+    - dict_dependances_emplacements : map<emplacement, vector<int>>
+
+    + estVide()
+    + initialiserPlateau(age, rCartes)
+    + initialiserRandomJetonProgres()
+    + choisirJetonsProgres()
+    + avancerPionConflit(value, joueur)
+    + isCarteAchetable(emplacement)
+    + acheterCarte(emplacement)
+    + defausseCarte(emplacement)
+    + afficherPlateau()
+    
+}
+
+Plateau "1" <-- "0..n" Carte : "est sur"
+
+Plateau "1" <-- "1" Jeu : "est sur"
+
+
+class JetonProgres {
+    - nom : string
+    - effet : EffetJetonProgres
+    - nb_pieces : int
+    - nb_points_victoire : int
+}
+
+class EffetJetonProgres {
+    - nom : string
+    - effet : NomEffetJetonProgres
+    - description : string
+}
+
+EffetJetonProgres "1..2" <-- "0..1" JetonProgres : "possède"
+
+enum NomEffetJetonProgres {
+    SixPiecesQuatrePoints
+    ReductionMerveilles
+    RecupereArgentDepense
+    GagneSymboleScientifique
+    ReductionCivils
+    TroisPointsVictoireEtTroisPointsVictoireParJetonProgres
+    SeptPointsVictoire
+    AmeliorationBatimentsMilitaires
+    RejouerPourChaqueMerveilleConstruite
+    SixPiecesEtQuatrePiecesParChainage
+    AucunEffet
+}
+
+EffetJetonProgres -- NomEffetJetonProgres
+
+Joueur "1" --> "0..5" JetonProgres :"Possède"
+
+JetonProgres "0..5" --> "1" Plateau : "est sur"
+
+class JetonMilitaire {
+    + nom : string
+    + description : string
+    + nb_pieces_perdues: int
+}
+
+Joueur "1" --> "0..3" JetonMilitaire :"Possède"
+
+JetonMilitaire "0..6" --> "1" Plateau : "est sur"
+
+
+@enduml

@@ -1,0 +1,220 @@
+@startuml Architecture
+
+class Jeu {
+    - age: int
+    - a_commence: bool
+
+    - joueur1 : Joueur
+    - joueur2 : Joueur
+    - plateau : Plateau
+    - tour: enum(J1, J2)
+    - winner : int (-1,0,1,2)
+
+    + avancerTour()
+    + avancerAge()
+    + verifierVictoire()
+    + debuterJeu()
+    + acheterCarte(joueur, emplacement)
+    + partie()
+    + calculPointsVictoire(joueur)
+    + calculPointsCivils(joueur)
+    + initialiserDictCartesPlateau(age)
+}
+
+class Joueur {
+    - nom: string
+    - DictCartes : map<TypeCarte, vector<pCarte>>
+    - DictRessources : map<Ressource, int>
+    - DictSymbolesScientifiques : map<Symbole, int>
+    - liste_jetons_progres : vector<Symbole>
+
+    + ajouterSymboleScientifique(symbole)
+    + ajouterJetonProgres(jeton)
+    + ajouterRessource(ressource, value)
+    + retirerRessource(ressource, value)
+    + ajouterCarte(pCarte)
+    + retirerCarte(pCarte)
+    }
+
+
+Joueur "2" --> "1" Jeu : "joue"
+
+Joueur "1" -- "1" Joueur : "joue contre"
+
+
+class Cartes {
+    - nom: string
+    - age: int
+    - type : TypeCarte
+
+    - chainage : Chainage (symbole_age_precedent, id_carte_age_precedent, symbole_age_suivant, id_carte_age_suivant)
+    }
+
+Cartes "0**n" <-- "0..1" Joueur : "possède"
+
+Cartes "1" --> "0..1" Cartes :"est chaîné"
+
+enum SymboleChainage {
+    Goutte
+    Masque
+    FerACheval
+    ...
+}
+
+Cartes -- SymboleChainage
+
+
+class Merveille {
+    - nb_boucliers : int
+    - nb_points_victoire : int
+    - nb_pieces : int
+    - effets : vector<id, nom, description>
+}
+
+Cartes <|-- Merveille : "est une"
+
+class MatierePremiere {
+    - ressource_produite : Ressource
+    - nb_ressources_produites : int
+}
+
+Cartes <|-- MatierePremiere: "est une"
+
+class Manufacture {
+    - ressource_produite : Ressource
+    - nb_ressources_produites : int
+}
+
+Cartes <|-- Manufacture: "est une"
+
+enum Ressource {
+    Bois
+    Pierre
+    Papyrus
+    Argile
+    Verre
+}
+
+MatierePremiere -- Ressource
+Manufacture -- Ressource
+
+
+class Civil {
+    - nb_points_victoire : int
+}
+
+Cartes <|-- Civil: "est une"
+
+
+class Scientifique {
+    - nb_points_victoire : int
+    - symbole_scientifique : SymboleScientifique
+}
+
+Cartes <|-- Scientifique: "est une"
+
+enum SymboleScientifique {
+    Plume
+    Roue
+    Horloge
+    Sphere
+    Mortier
+    FilAPlomb
+    Balance
+}
+
+Scientifique -- SymboleScientifique
+
+
+class Militaire {
+    - nb_boucliers : int
+}
+
+Cartes <|-- Militaire: "est une"
+
+
+class Guilde {
+    - effet: EffetGuilde
+}
+
+Cartes <|-- Guilde: "est une"
+
+enum EffetGuilde {
+    Armateurs
+    Batisseurs
+    Commercants
+    Magistrats
+    Tacticiens
+    Scientifiques
+    Usuriers
+}
+
+Guilde -- EffetGuilde
+
+
+class Commercial {
+    - nb_points_victoire : int
+    - nb_pieces : int
+    - ressources_gratuites : vector<Ressource>
+    - baisses_prix : map<Ressource, int>
+    - batiment_gain_pieces : TypeCarte
+    - gain_pieces_par_batiment : int
+}
+
+
+
+
+Cartes <|-- Commercial: "est une"
+
+
+Commercial -- Ressource
+
+
+class Plateau {
+    - pion_conflit: int
+    - vainqueur_militaire : string
+    - jetons_progres_disponibles : vector<JetonProgres>
+    - dict_cartes : vector<emplacement, carte>
+    - emplacements_achetes : vector<int>
+    - emplacements_caches : vector<int>
+    - dict_dependances_emplacements : map<emplacement, dependance>
+
+    + initialiserPlateau(age, dict_cartes)
+    + initialiserRandomJetonProgres()
+    + isCarteAchetable(emplacement)
+    + acheterCarte(emplacement)
+    + defausseCarte(emplacement)
+    + estVide()
+    + afficherPlateau()
+    + avancerPionConflit(value, joueur)
+    + victoireMilitaire()
+}
+
+Plateau "1" <-- "0..n" Cartes : "est sur"
+
+Plateau "1" <-- "1" Jeu : "est sur"
+
+
+class JetonProgres {
+    - effet: string
+
+    + appliquerEffet(): void
+}
+
+Joueur "1" --> "0..5" JetonProgres :"Possède"
+
+JetonProgres "0..5" --> "1" Plateau : "est sur"
+
+class JetonMilitaire {
+    - nb_points: int
+    - position_plateau_conflit: int
+
+    + ajouterPoints(): void
+}
+
+Joueur "1" --> "0..6" JetonMilitaire :"Possède"
+
+JetonMilitaire "0..6" --> "1" Plateau : "est sur"
+
+
+@enduml

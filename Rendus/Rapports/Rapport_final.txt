@@ -1,0 +1,6 @@
+Nous avons fait le choix de traiter les pièces comme un total, sans se préoccuper de la notion de pièces de 1, 3 et 6.
+Pour le calcul de points en fin de jeu, on ne traite pas les "lots complets de 3 pièces qui rapportent 1 points", mais uniquement la division entière du nombre total de pièces (de 1...)
+
+Il y a un nombre non limité de pièces
+
+Il n'y a pas de règle pour savoir qui commence, on décide de faire commencer J1
